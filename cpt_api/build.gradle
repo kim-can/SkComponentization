@@ -1,0 +1,20 @@
+apply plugin: 'sk.plugin'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+    }
+
+}
+
+dependencies {
+    api project(":cpt_res")
+    api project(":cpt_libs")
+    api project(":cpt_views")
+}

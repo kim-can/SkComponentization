@@ -1,0 +1,1 @@
+include ':app', ':cpt_api', ':module_main', ':module_order', ':module_user', ':cpt_res', ':cpt_libs', ':cpt_views'

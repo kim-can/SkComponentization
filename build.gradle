@@ -1,0 +1,53 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'sk:plugin:4.0.0'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.0.0'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+
+        //中央库-快照
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+//时间：2019.1.28；每次修改版本号都要添加修改时间
+ext {
+    // 每次更改“isRunAlone”的值后，需要点击 "Sync Project" 按钮
+    // isRunAlone是“集成开发模式”和“组件开发模式”的切换开关  true "组件开发模式"  false "集成开发模式"
+    isRunAlone = false
+    // sky架构版本
+    skVersion = "4.0.0-SNAPSHOT"
+
+
+    // Sdk and tools
+    buildToolsVersion = "28.0.3"
+    compileSdkVersion = 28
+    minSdkVersion = 18
+    targetSdkVersion = 26
+    versionCode = 1
+    versionName = "1.0"
+    javaVersion = JavaVersion.VERSION_1_8
+
+}
