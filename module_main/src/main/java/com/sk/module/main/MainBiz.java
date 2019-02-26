@@ -5,6 +5,7 @@ import sk.SKHelper;
 import sky.Background;
 import sky.BackgroundType;
 import sky.OpenMethod;
+import sky.SKWork;
 
 import android.os.Bundle;
 
@@ -20,7 +21,7 @@ public class MainBiz extends SKBiz {
 
 	@Override public void initBiz(Bundle bundle) {}
 
-	@OpenMethod(MainApi.showTip) @Background(BackgroundType.HTTP) public void showTip(String value) {
+	@OpenMethod(MainApi.showTip) @SKWork public void showTip(String value) {
 
 		try {
 			Thread.sleep(2000);

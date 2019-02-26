@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 import com.sk.api.OderApi;
+import com.sk.api.UserApi;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,7 +43,11 @@ public class MainActivity extends SKActivity<MainBiz> {
 		SKHelper.moduleBiz(OderApi.intentOder).run();
 	}
 
-	@OnClick(R2.id.btn_user) public void onBtnUserClicked() {}
+	@OnClick(R2.id.btn_user) public void onBtnUserClicked() {
+		SKHelper.moduleBiz(UserApi.intentUser).run("sky","jc123",20);
+	}
 
-	@OnClick(R2.id.btn_login) public void onBtnLoginClicked() {}
+	@OnClick(R2.id.btn_login) public void onBtnLoginClicked() {
+		SKHelper.moduleBiz(UserApi.intentLogin).run();
+	}
 }

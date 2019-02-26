@@ -88,7 +88,7 @@ dependencies {
     } else {
         implementation project(':module_main')
         implementation project(':module_order')
-//        implementation project(':module_user')
+        implementation project(':module_user')
     }
 
 

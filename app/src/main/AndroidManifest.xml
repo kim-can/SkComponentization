@@ -21,5 +21,11 @@
         <activity
             android:name="com.sk.module.order.OderActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.sk.module.user.LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name="com.sk.module.user.UserActivity"
+            android:screenOrientation="portrait"/>
     </application>
 </manifest>

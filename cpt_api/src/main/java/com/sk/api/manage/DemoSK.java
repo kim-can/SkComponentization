@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sk.api.UserApi;
 import com.sk.cpt.views.dialog.LoadingDialogFragment;
 
 import java.lang.reflect.Method;
@@ -15,6 +16,7 @@ import sk.L;
 import sk.SKActivity;
 import sk.SKDefaultManager;
 import sk.SKErrorEnum;
+import sk.SKHelper;
 import sk.SKInterceptor;
 import sk.livedata.SKData;
 import sk.plugins.SKActivityInterceptor;
@@ -34,22 +36,22 @@ public class DemoSK implements ISK {
 	}
 
 	@Override public Retrofit.Builder httpAdapter(Retrofit.Builder builder) {
-        builder.baseUrl("https://api.github.com");
+		builder.baseUrl("https://api.github.com");
 
-        Gson gson = new GsonBuilder().setLenient().create();
-        builder.addConverterFactory(GsonConverterFactory.create(gson));
-        return builder;
+		Gson gson = new GsonBuilder().setLenient().create();
+		builder.addConverterFactory(GsonConverterFactory.create(gson));
+		return builder;
 	}
 
 	@Override public SKInterceptor.Builder pluginInterceptor(SKInterceptor.Builder builder) {
 		builder.addErrorIntercepor(new SKErrorInterceptor() {
-			@Override
-			public void interceptorError(Method method, Object clazz, Object[] objects, int interceptor, SKErrorEnum skErrorEnum) {
+
+			@Override public void interceptorError(Method method, Object clazz, Object[] objects, int interceptor, SKErrorEnum skErrorEnum) {
 				L.e(method.getName() + ":" + clazz + ":" + objects + "：：" + interceptor);
 				for (Object obj : objects) {
 					if (obj instanceof SKData) {
 						SKData skData = (SKData) obj;
-						switch (skErrorEnum){
+						switch (skErrorEnum) {
 							case HTTP:
 								skData.layoutError();
 								skData.closeLoading();
@@ -70,8 +72,16 @@ public class DemoSK implements ISK {
 
 			@Override public boolean interceptStart(String clazzName, Bundle bundle) {
 				L.i("执行开始 ::::" + clazzName + ": " + bundle);
+				if (clazzName.indexOf("LoginActivity") != -1) {
+					SKHelper.toast().show("未登录状态,请先登录");
+					return false;
+				}
+				boolean isLogin = SKHelper.moduleBiz(UserApi.checkLogin).run();
 
-				return false;
+				if (!isLogin) {
+					SKHelper.toast().show("未登录状态,请先登录");
+				}
+				return !isLogin;
 			}
 		});
 		builder.setDisplayEndInterceptor(new SKDisplayEndInterceptor() {
